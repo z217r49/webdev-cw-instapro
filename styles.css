@@ -196,3 +196,67 @@
   width: 100%;
   text-align: center;
 }
+
+/* ===== Дополнительные стили ===== */
+
+.page-container {
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.post-header__user-name {
+  font-weight: 500;
+}
+
+.post-likes-text {
+  font-size: 14px;
+}
+
+.delete-button {
+  margin-left: auto;
+  border: none;
+  background: none;
+  color: #8a8a8a;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px 8px;
+}
+
+.delete-button:hover {
+  color: #e05c5c;
+}
+
+.empty-text {
+  text-align: center;
+  color: #8a8a8a;
+  margin-top: 40px;
+  font-size: 16px;
+}
+
+/* Анимация лайка */
+.like-button img {
+  width: 22px;
+  height: 19px;
+  display: block;
+  transition: transform 0.15s ease;
+}
+
+.like-button:active img {
+  transform: scale(1.35);
+}
+
+/* Плавный переход при наведении на имя автора */
+.post-header__user-name {
+  transition: color 0.15s ease;
+}
+
+.post-header:hover .post-header__user-name {
+  color: #565eef;
+}
+
+/* Адаптивность: на мобильных картинка не растягивается слишком высоко */
+@media (max-width: 480px) {
+  .post-image-container {
+    height: 320px;
+  }
+}
