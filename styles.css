@@ -260,3 +260,29 @@
     height: 320px;
   }
 }
+
+/* ===== Навигация в шапке ===== */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Кнопка "Лента" — ровно по центру шапки */
+.nav-feed-button {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #565eef;
+  font-weight: 500;
+}
+
+.nav-feed-button:hover {
+  color: #6d73ff;
+}
+
+/* Шапка становится контейнером для абсолютного центрирования */
+.page-header {
+  position: relative;
+}
