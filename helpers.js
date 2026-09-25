@@ -1,5 +1,3 @@
-// ===== Работа с localStorage =====
-
 export function saveUserToLocalStorage(user) {
   window.localStorage.setItem("user", JSON.stringify(user));
 }
@@ -16,12 +14,6 @@ export function removeUserFromLocalStorage() {
   window.localStorage.removeItem("user");
 }
 
-// ===== Форматирование даты =====
-
-/**
- * Форматирует дату в относительный вид: "только что", "5 минут назад",
- * "2 часа назад", "3 дня назад". Старше недели — обычная дата.
- */
 export function formatRelativeTime(isoDate) {
   const date = new Date(isoDate);
   const diffSec = Math.round((Date.now() - date.getTime()) / 1000);
@@ -40,7 +32,6 @@ export function formatRelativeTime(isoDate) {
   return date.toLocaleDateString("ru-RU");
 }
 
-/** Русские склонения: 1 минуту, 2 минуты, 5 минут */
 function plural(n, one, few, many) {
   const mod10 = n % 10;
   const mod100 = n % 100;
@@ -49,8 +40,6 @@ function plural(n, one, few, many) {
     return `${n} ${few}`;
   return `${n} ${many}`;
 }
-
-// ===== Экранирование HTML (защита от XSS) =====
 
 export function escapeHtml(str) {
   return String(str)

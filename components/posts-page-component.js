@@ -8,13 +8,12 @@ export function renderPostsPageComponent({ appEl }) {
   const appHtml = `
     <div class="page-container">
       <div class="header-container"></div>
-      ${
-        posts.length
-          ? `<ul class="posts">
+      ${posts.length
+      ? `<ul class="posts">
               ${posts.map((post) => renderPostCard(post, user)).join("")}
             </ul>`
-          : `<p class="empty-text">Пока нет постов. Добавьте первый!</p>`
-      }
+      : `<p class="empty-text">Пока нет постов. Добавьте первый!</p>`
+    }
     </div>
   `;
 
@@ -24,7 +23,6 @@ export function renderPostsPageComponent({ appEl }) {
     element: document.querySelector(".header-container"),
   });
 
-  // Переход на страницу конкретного пользователя
   for (const userEl of appEl.querySelectorAll(".post-header")) {
     userEl.addEventListener("click", () => {
       goToPage(USER_POSTS_PAGE, {
@@ -34,7 +32,6 @@ export function renderPostsPageComponent({ appEl }) {
     });
   }
 
-  // Лайки / дизлайки — обновляем только иконку и счётчик, без перезагрузки страницы
   for (const likeEl of appEl.querySelectorAll(".like-button")) {
     likeEl.addEventListener("click", () => {
       if (!user) {
@@ -49,7 +46,6 @@ export function renderPostsPageComponent({ appEl }) {
         .then((data) => {
           const post = data.post;
 
-          // Обновляем иконку лайка
           const likeImg = likeEl.querySelector("img");
           likeImg.src = post.isLiked
             ? "./assets/images/like-active.svg"
@@ -57,7 +53,6 @@ export function renderPostsPageComponent({ appEl }) {
           likeEl.dataset.isLiked = post.isLiked;
           likeEl.title = post.isLiked ? "Убрать лайк" : "Поставить лайк";
 
-          // Обновляем счётчик лайков
           const counter = likeEl
             .closest(".post-likes")
             .querySelector(".post-likes-text strong");
@@ -67,7 +62,6 @@ export function renderPostsPageComponent({ appEl }) {
     });
   }
 
-  // Удаление своего поста
   for (const deleteEl of appEl.querySelectorAll(".delete-button")) {
     deleteEl.addEventListener("click", () => {
       if (!confirm("Удалить пост?")) return;

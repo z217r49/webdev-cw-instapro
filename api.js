@@ -1,12 +1,9 @@
-// Замени на свой, чтобы получить независимый от других набор данных.
-// "боевая" версия инстапро лежит в ключе prod
 const personalKey = "aldanup";
 const baseHost = "https://wedev-api.sky.pro";
 const postsHost = `${baseHost}/api/v1/${personalKey}/instapro`;
 const usersHost = `${baseHost}/api/user`;
 const uploadHost = `${baseHost}/api/upload/image`;
 
-// GET / — все посты
 export function getPosts({ token }) {
   return fetch(postsHost, {
     method: "GET",
@@ -19,7 +16,6 @@ export function getPosts({ token }) {
     .then((data) => data.posts);
 }
 
-// GET /user-posts/:id — посты конкретного пользователя
 export function getUserPosts({ id, token }) {
   return fetch(postsHost + "/user-posts/" + id, {
     method: "GET",
@@ -32,7 +28,6 @@ export function getUserPosts({ id, token }) {
     .then((data) => data.posts);
 }
 
-// POST / — добавить пост
 export function addPost({ description, imageUrl, token }) {
   return fetch(postsHost, {
     method: "POST",
@@ -45,7 +40,6 @@ export function addPost({ description, imageUrl, token }) {
   });
 }
 
-// POST /:id/like — поставить лайк
 export function likePost({ id, token }) {
   return fetch(postsHost + "/" + id + "/like", {
     method: "POST",
@@ -56,7 +50,6 @@ export function likePost({ id, token }) {
   });
 }
 
-// POST /:id/dislike — снять лайк
 export function dislikePost({ id, token }) {
   return fetch(postsHost + "/" + id + "/dislike", {
     method: "POST",
@@ -67,7 +60,6 @@ export function dislikePost({ id, token }) {
   });
 }
 
-// DELETE /:id — удалить пост
 export function deletePost({ id, token }) {
   return fetch(postsHost + "/" + id, {
     method: "DELETE",
@@ -78,7 +70,6 @@ export function deletePost({ id, token }) {
   });
 }
 
-// POST /api/user/login — вход (API пользователей)
 export function loginUser({ login, password }) {
   return fetch(usersHost + "/login", {
     method: "POST",
@@ -89,7 +80,6 @@ export function loginUser({ login, password }) {
   });
 }
 
-// POST /api/user — регистрация (API пользователей)
 export function registerUser({ login, password, name, imageUrl }) {
   return fetch(usersHost, {
     method: "POST",
@@ -101,7 +91,6 @@ export function registerUser({ login, password, name, imageUrl }) {
   });
 }
 
-// POST /api/upload/image — загрузка изображения (multipart, поле "file")
 export function uploadImage({ file }) {
   const data = new FormData();
   data.append("file", file);

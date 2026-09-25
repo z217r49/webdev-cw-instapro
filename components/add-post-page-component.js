@@ -60,7 +60,7 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
 
       onAddPostClick({ description, imageUrl })
         .then(() => {
-          // После успешной публикации index.js сам перейдёт на ленту
+
         })
         .catch((error) => {
           setError(error.message);

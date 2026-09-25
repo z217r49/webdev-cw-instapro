@@ -1,18 +1,13 @@
 import { formatRelativeTime, escapeHtml } from "../helpers.js";
 
-/**
- * Возвращает HTML-разметку карточки поста.
- * @param {Object} post - пост из API
- * @param {Object|null} currentUser - текущий авторизованный пользователь (или null)
- */
 export function renderPostCard(post, currentUser) {
-    const postDate = formatRelativeTime(post.createdAt);
-    const likeIcon = post.isLiked
-        ? "./assets/images/like-active.svg"
-        : "./assets/images/like-not-active.svg";
-    const isOwn = currentUser && post.user.login === currentUser.login;
+  const postDate = formatRelativeTime(post.createdAt);
+  const likeIcon = post.isLiked
+    ? "./assets/images/like-active.svg"
+    : "./assets/images/like-not-active.svg";
+  const isOwn = currentUser && post.user.login === currentUser.login;
 
-    return `
+  return `
     <li class="post">
       <div class="post-header" data-user-id="${post.user.id}" data-user-name="${escapeHtml(post.user.name)}">
         <img src="${post.user.imageUrl}" class="post-header__user-image" alt="">

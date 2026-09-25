@@ -10,24 +10,24 @@ export function renderUserPostsPageComponent({ appEl }) {
 
     const appHtml = `
     <div class="page-container">
-      <div class="header-container"></div>
-      ${viewedUser
+        <div class="header-container"></div>
+        ${viewedUser
             ? `
             <div class="posts-user-header">
-              <img class="posts-user-header__user-image" src="${viewedUser.imageUrl}" alt="">
-              <p class="posts-user-header__user-name">${escapeHtml(viewedUser.name)}</p>
+                <img class="posts-user-header__user-image" src="${viewedUser.imageUrl}" alt="">
+                <p class="posts-user-header__user-name">${escapeHtml(viewedUser.name)}</p>
             </div>
-          `
+            `
             : ""
         }
-      ${posts.length
+        ${posts.length
             ? `<ul class="posts">
-              ${posts.map((post) => renderPostCard(post, user)).join("")}
+                ${posts.map((post) => renderPostCard(post, user)).join("")}
             </ul>`
             : `<p class="empty-text">У пользователя пока нет постов</p>`
         }
     </div>
-  `;
+    `;
 
     appEl.innerHTML = appHtml;
 
@@ -35,7 +35,6 @@ export function renderUserPostsPageComponent({ appEl }) {
         element: document.querySelector(".header-container"),
     });
 
-    // Лайки / дизлайки — обновляем только иконку и счётчик, без перезагрузки страницы
     for (const likeEl of appEl.querySelectorAll(".like-button")) {
         likeEl.addEventListener("click", () => {
             if (!user) {
@@ -50,7 +49,6 @@ export function renderUserPostsPageComponent({ appEl }) {
                 .then((data) => {
                     const post = data.post;
 
-                    // Обновляем иконку лайка
                     const likeImg = likeEl.querySelector("img");
                     likeImg.src = post.isLiked
                         ? "./assets/images/like-active.svg"
@@ -58,7 +56,6 @@ export function renderUserPostsPageComponent({ appEl }) {
                     likeEl.dataset.isLiked = post.isLiked;
                     likeEl.title = post.isLiked ? "Убрать лайк" : "Поставить лайк";
 
-                    // Обновляем счётчик лайков
                     const counter = likeEl
                         .closest(".post-likes")
                         .querySelector(".post-likes-text strong");
@@ -68,7 +65,6 @@ export function renderUserPostsPageComponent({ appEl }) {
         });
     }
 
-    // Удаление своего поста
     for (const deleteEl of appEl.querySelectorAll(".delete-button")) {
         deleteEl.addEventListener("click", () => {
             if (!confirm("Удалить пост?")) return;

@@ -232,7 +232,6 @@
   font-size: 16px;
 }
 
-/* Анимация лайка */
 .like-button img {
   width: 22px;
   height: 19px;
@@ -244,7 +243,6 @@
   transform: scale(1.35);
 }
 
-/* Плавный переход при наведении на имя автора */
 .post-header__user-name {
   transition: color 0.15s ease;
 }
@@ -253,14 +251,11 @@
   color: #565eef;
 }
 
-/* Адаптивность: на мобильных картинка не растягивается слишком высоко */
 @media (max-width: 480px) {
   .post-image-container {
     height: 320px;
   }
 }
-
-/* ===== Навигация в шапке ===== */
 
 .header-actions {
   display: flex;
@@ -268,7 +263,6 @@
   gap: 16px;
 }
 
-/* Кнопка "Лента" — ровно по центру шапки */
 .nav-feed-button {
   position: absolute;
   left: 50%;
@@ -281,7 +275,6 @@
   color: #6d73ff;
 }
 
-/* Шапка становится контейнером для абсолютного центрирования */
 .page-header {
   position: relative;
 }

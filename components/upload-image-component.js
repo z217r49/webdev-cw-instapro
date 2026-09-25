@@ -1,6 +1,5 @@
 import { uploadImage } from "../api.js";
 
-// Сжимает изображение до maxSize по большей стороне и возвращает Blob (JPEG)
 function compressImage(file, maxSize = 1200, quality = 0.8) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -39,10 +38,6 @@ function compressImage(file, maxSize = 1200, quality = 0.8) {
   });
 }
 
-/**
- * Компонент загрузки изображения.
- * Позволяет выбрать файл, сжимает его и загружает в облако, показывая превью.
- */
 export function renderUploadImageComponent({ element, onImageUrlChange }) {
   let imageUrl = "";
 
@@ -71,7 +66,6 @@ export function renderUploadImageComponent({ element, onImageUrlChange }) {
       </div>
     `;
 
-    // Обработчик выбора файла
     const fileInputElement = element.querySelector(".file-upload-input");
     fileInputElement?.addEventListener("change", () => {
       const file = fileInputElement.files[0];
@@ -80,13 +74,12 @@ export function renderUploadImageComponent({ element, onImageUrlChange }) {
         labelEl.setAttribute("disabled", true);
         labelEl.textContent = "Загружаю файл...";
 
-        // Сжимаем изображение, чтобы не превысить лимит размера загрузки
         compressImage(file)
           .then((compressed) => uploadImage({ file: compressed }))
           .then(({ fileUrl }) => {
-            imageUrl = fileUrl; // Сохраняем URL загруженного изображения
-            onImageUrlChange(imageUrl); // Уведомляем об изменении URL
-            render(); // Перерисовываем компонент с превью
+            imageUrl = fileUrl;
+            onImageUrlChange(imageUrl);
+            render();
           })
           .catch((error) => {
             labelEl.removeAttribute("disabled");
@@ -96,7 +89,6 @@ export function renderUploadImageComponent({ element, onImageUrlChange }) {
       }
     });
 
-    // Обработчик удаления изображения
     element
       .querySelector(".file-upload-remove-button")
       ?.addEventListener("click", () => {
